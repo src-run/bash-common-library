@@ -18,8 +18,8 @@ readonly _CORE_SELF_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/"
 #
 # include dependencies
 #
-source "${_CORE_SELF_PATH}core-variables.bash"
-source "${_CORE_SELF_PATH}core-stdio.bash"
-source "${_CORE_SELF_PATH}core-users.bash"
-source "${_CORE_SELF_PATH}core-dependencies.bash"
-source "${_CORE_SELF_PATH}core-construct.bash"
+source "${_CORE_SELF_PATH}_core-variables.bash"
+source "${_CORE_SELF_PATH}_core-stdio.bash"
+source "${_CORE_SELF_PATH}_core-users.bash"
+source "${_CORE_SELF_PATH}_core-dependencies.bash"
+source "${_CORE_SELF_PATH}_core-construct.bash"

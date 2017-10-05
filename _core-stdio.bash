@@ -321,7 +321,7 @@ function _core_dependency_loaded()
   local full="${1}"
   local path="$(cd "$(dirname "${full}")" && pwd)"
   local base="$(basename "${full}" ".bash")"
-  local name="${base:5}"
+  local name="${base:6}"
 
   _stdio_write_verbose_debug 'Sourced "%s" core dependency at "%s"' ${name} "${path}/${base}.bash"
 }

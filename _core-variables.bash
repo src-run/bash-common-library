@@ -88,7 +88,7 @@ function _core_dependency_loaded()
   local full="${1}"
   local path="$(cd "$(dirname "${full}")" && pwd)"
   local base="$(basename "${full}" ".bash")"
-  local name="${base:5}"
+  local name="${base:6}"
 
   if [ ${_CORE_STDIO_VERBOSITY} -ge ${_CORE_STDIO_VERBOSITY_DEBUG} ]; then
     echo -en "-- " && printf '[DEBUG-2] Sourced "%s" core dependency at "%s"\n' ${name} "${path}/${base}.bash"
