@@ -22,7 +22,9 @@ function _user_euid()
 #
 function _user_is_root()
 {
-  test $(_user_euid) -eq 0 && return ${_CORE_PREVILEGES_RET_OK} || return ${_CORE_PREVILEGES_RET_ER}
+  test $(_user_euid) -eq 0 && \
+    return ${_CORE_PREVILEGES_RET_OK} || \
+    return ${_CORE_PREVILEGES_RET_ER}
 }
 
 #
@@ -30,7 +32,9 @@ function _user_is_root()
 #
 function _user_is_not_root()
 {
-  test $(_user_euid) -ne 0 && return ${_CORE_PREVILEGES_RET_OK} || return ${_CORE_PREVILEGES_RET_ER}
+  test $(_user_euid) -ne 0 && \
+    return ${_CORE_PREVILEGES_RET_OK} || \
+    return ${_CORE_PREVILEGES_RET_ER}
 }
 
 #
@@ -38,13 +42,11 @@ function _user_is_not_root()
 #
 function _user_require_root()
 {
-  _user_is_root
-
-  if [ $? -eq ${_CORE_PREVILEGES_RET_ER} ]; then
-	  _stdio_write_critical ${_CORE_PREVILEGES_RET_ER} \
-	  	'This action MUST be run with elevated privileges (detected "%d" user id). You may use "sudo" or other privilege escalation tools to do so.' \
-	  	$(_user_euid)
-  fi
+  _user_is_root || \
+    _stdio_write_critical \
+    ${_CORE_PREVILEGES_RET_ER} \
+    'This action MUST be run with elevated privileges (detected uid %d). You MUST use "sudo" or other privilege escalation tools...' \
+    $(_user_euid)
 }
 
 #
@@ -52,16 +54,14 @@ function _user_require_root()
 #
 function _user_require_not_root()
 {
-  _user_is_not_root
-
-  if [ $? -eq ${_CORE_PREVILEGES_RET_ER} ]; then
-	  _stdio_write_critical ${_CORE_PREVILEGES_RET_ER} \
-	  	'This action MUST be run with non-elevated privileges (detected "%d" user id). You must not use "sudo" or other privilege escalation tools' \
-	  	$(_user_euid)
-  fi
+  _user_is_not_root || \
+    _stdio_write_critical \
+    ${_CORE_PREVILEGES_RET_ER} \
+    'This action MUST be run with NON-elevated privileges (detected uid %d). You MUST NOT use "sudo" or other privilege escalation tools...' \
+    $(_user_euid)
 }
 
 #
 # write dependency loaded debug text
 #
-_stdio_write_dependency_load "${BASH_SOURCE[0]}"
+_core_dependency_loaded "${BASH_SOURCE[0]}"

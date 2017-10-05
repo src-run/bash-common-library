@@ -12,13 +12,14 @@
 #
 # std verbosity levels
 #
+_CORE_STDIO_VERBOSITY_NONE=-10
 _CORE_STDIO_VERBOSITY_VERY_QUIET=-2
 _CORE_STDIO_VERBOSITY_QUIET=-1
 _CORE_STDIO_VERBOSITY_NORMAL=0
 _CORE_STDIO_VERBOSITY_VERBOSE=1
 _CORE_STDIO_VERBOSITY_VERY_VERBOSE=2
 _CORE_STDIO_VERBOSITY_DEBUG=3
-_CORE_STDIO_VERBOSITY_VERBOSE_DEBUG=4
+_CORE_STDIO_VERBOSITY_VERBOSE_DEBUG=10
 
 #
 # set stdio default verbosity
@@ -32,7 +33,8 @@ fi
 #
 _CORE_PREVILEGES_RET_OK=0
 _CORE_PREVILEGES_RET_ER=100
-_CORE_STDIO_RET_ER=110
+_CORE_STDIO_RET_OK=0
+_CORE_STDIO_RET_ER=150
 _CORE_DEPENDENCIES_RET_ER=120
 
 #
@@ -79,21 +81,21 @@ fi
 declare -A _DEPS_RESOLVED
 
 #
-# output warning
+# output dependency loaded verbose debug information
 #
-function _stdio_write_dependency_load()
+function _core_dependency_loaded()
 {
   local full="${1}"
   local path="$(cd "$(dirname "${full}")" && pwd)"
-  local file="$(basename "${full}" ".bash")"
-  local name="${file:5}"
+  local base="$(basename "${full}" ".bash")"
+  local name="${base:5}"
 
-  if [ ${_CORE_STDIO_VERBOSITY} -ge ${_CORE_STDIO_VERBOSITY_VERBOSE_DEBUG} ]; then
-    printf '[INIT] Loaded "core-library" dependency "%s" from "%s"...\n' ${name} "${path}/${file}.bash"
+  if [ ${_CORE_STDIO_VERBOSITY} -ge ${_CORE_STDIO_VERBOSITY_DEBUG} ]; then
+    echo -en "-- " && printf '[DEBUG-2] Sourced "%s" core dependency at "%s"\n' ${name} "${path}/${base}.bash"
   fi
 }
 
 #
 # write dependency loaded debug text
 #
-_stdio_write_dependency_load "${BASH_SOURCE[0]}"
+_core_dependency_loaded "${BASH_SOURCE[0]}"

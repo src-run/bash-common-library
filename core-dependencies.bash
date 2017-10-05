@@ -14,13 +14,13 @@
 #
 function _dependencies_resolve_paths()
 {
+  local path=""
+  local real=""
+  local ok=0
+
   if [ ${#_DEPS_NAMED[@]} -eq 0 ]; then
     return
   fi
-
-  local path=""
-  local real=""
-  local okay=0
 
   for name in "${_DEPS_NAMED[@]}"; do
     for root in "${_CORE_DEPENDENCY_ROOTS[@]}"; do
@@ -29,32 +29,34 @@ function _dependencies_resolve_paths()
         real="$(realpath "${path}" 2> /dev/null)"
 
         if [ -f "${real}" ]; then
-          _stdio_write_debug 'Runtime dependency "%s" resolved to "%s"...' ${name} "${real}"
+          _stdio_write_debug 'Resolved the "%s" runtime dependency to "%s"' ${name} "${real}"
           _DEPS_RESOLVED[${name}]="${real}"
-          okay=1
+          ok=1
           break 2
+        else
+          _stdio_write_very_verbose_debug 'Searched for "%s" runtime dependency in "%s"' ${name} "${path}"
         fi
-
-        _stdio_write_verbose_debug 'Runtime dependency "%s" NOT resolved to "%s"...' ${name} "${path}"
       done
     done
 
-    if [ ${okay} -eq 0 ]; then
-      _stdio_write_error 'Failed resolving runtime dependency "%s"!' ${name}
+    if [ ${ok} -ne 1 ]; then
+      _stdio_write_error 'Failure resolving "%s" runtime dependency' ${name}
     fi
 
-    okay=0
+    ok=0
   done
+
+  local sizeNamed=${#_DEPS_NAMED[@]}
+  local sizeResolved=${#_DEPS_RESOLVED[@]}
+
+  if [ ${sizeNamed} -ne ${sizeResolved} ]; then
+    _stdio_write_critical ${_CORE_DEPENDENCIES_RET_ER} \
+      'Resolved %d of %d runtime dependencies (%d unsuccessful): exiting due to prior failure(s)...' \
+      ${sizeResolved} ${sizeNamed} $(((${sizeNamed} - ${sizeResolved})))
+  fi
 }
 
 #
 # write dependency loaded debug text
 #
-_stdio_write_dependency_load "${BASH_SOURCE[0]}"
-
-#
-# handle auto dependency resolution
-#
-if [ ${_CORE_DEPENDENCY_AUTO} -eq 1 ]; then
-  _dependencies_resolve_paths
-fi
+_core_dependency_loaded "${BASH_SOURCE[0]}"
