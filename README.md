@@ -3,18 +3,18 @@
 
 ## Overview
 
-[Welcome](https://scr.be/go/readme_welcome)!
+[Welcome](https://src.run/go/readme_welcome)!
 The `core-library` provides a lightweight collection of core bash functionality, including basic StdIO logic, user- permissions-related logic, and automatic runtime dependency loading logic.
 
 ### JTT
 
 This package represents a single project within a
-[large collection](https://scr.be/go/explore) of open-source code released
+[large collection](https://src.run/go/explore) of open-source code released
 under the *Scribe* namespace, comprised of framework-agnostic libraries,
 and a number of Symfony bundles. These projects are authored and maintained
-by [Rob Frawley 2nd](https://scr.be/rmf) and 
-[collaborators](https://scr.be/bash-core-library/github_collaborators),
-often with the support of [Scribe Inc](https://scr.be/go/scribe-home).
+by [Rob Frawley 2nd](https://src.run/rmf) and 
+[collaborators](https://src.run/bash-core-library/github_collaborators),
+often with the support of [Scribe Inc](https://src.run/go/scribe-home).
 
 ## Contributing
 
@@ -28,8 +28,8 @@ be joined using the following link
 ### Issues
 
 To report issues or request a new feature use
-[GitHub](https://scr.be/bash-core-library/github_issues)
-or [GitLab](https://scr.be/bash-core-library/gitlab_issues)
+[GitHub](https://src.run/bash-core-library/github_issues)
+or [GitLab](https://src.run/bash-core-library/gitlab_issues)
 to start a discussion. Include as much information as possible to aid in
 a quick resolution. Feel free to "ping" the topic if you don't get a
 response within a few days.
@@ -39,16 +39,16 @@ response within a few days.
 You created additional functionality during the use of this package? Send
 it back upstream! *Don't hesitate to submit a pull request!* Beyond the
 brief requirements outlined in the
-[contibuting guide](https://scr.be/bash-core-library/contributing),
-your [imagination](https://scr.be/go/readme_imagination)
+[contibuting guide](https://src.run/bash-core-library/contributing),
+your [imagination](https://src.run/go/readme_imagination)
 represents the only limitation.
 
 ## License
 
 This project is licensed under the
-[MIT License](https://scr.be/go/mit), an
-[FSF](https://scr.be/go/fsf)-/[OSI](https://scr.be/go/osi)-approved
-and [GPL](https://scr.be/go/gpl)-compatible, permissive free software
+[MIT License](https://src.run/go/mit), an
+[FSF](https://src.run/go/fsf)-/[OSI](https://src.run/go/osi)-approved
+and [GPL](https://src.run/go/gpl)-compatible, permissive free software
 license. Review the
-[LICENSE](https://scr.be/bash-core-library/license)
+[LICENSE](https://src.run/bash-core-library/license)
 file distributed with this source code for additional information.
