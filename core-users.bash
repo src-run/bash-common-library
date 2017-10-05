@@ -23,8 +23,8 @@ function _user_euid()
 function _user_is_root()
 {
   test $(_user_euid) -eq 0 && \
-    return ${_CORE_PREVILEGES_RET_OK} || \
-    return ${_CORE_PREVILEGES_RET_ER}
+    return ${_CORE_USERS_RET_OK} || \
+    return ${_CORE_USERS_RET_ER}
 }
 
 #
@@ -33,8 +33,8 @@ function _user_is_root()
 function _user_is_not_root()
 {
   test $(_user_euid) -ne 0 && \
-    return ${_CORE_PREVILEGES_RET_OK} || \
-    return ${_CORE_PREVILEGES_RET_ER}
+    return ${_CORE_USERS_RET_OK} || \
+    return ${_CORE_USERS_RET_ER}
 }
 
 #
@@ -44,7 +44,7 @@ function _user_require_root()
 {
   _user_is_root || \
     _stdio_write_critical \
-    ${_CORE_PREVILEGES_RET_ER} \
+    ${_CORE_USERS_RET_ER} \
     'This action MUST be run with elevated privileges (detected uid %d). You MUST use "sudo" or other privilege escalation tools...' \
     $(_user_euid)
 }
@@ -56,7 +56,7 @@ function _user_require_not_root()
 {
   _user_is_not_root || \
     _stdio_write_critical \
-    ${_CORE_PREVILEGES_RET_ER} \
+    ${_CORE_USERS_RET_ER} \
     'This action MUST be run with NON-elevated privileges (detected uid %d). You MUST NOT use "sudo" or other privilege escalation tools...' \
     $(_user_euid)
 }
