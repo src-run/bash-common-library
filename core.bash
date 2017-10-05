@@ -12,6 +12,7 @@
 #
 # internal variables
 #
+readonly _CORE_VERSION="master"
 readonly _CORE_SELF_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/"
 
 #

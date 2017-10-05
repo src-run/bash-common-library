@@ -17,6 +17,6 @@ _core_dependency_loaded "${BASH_SOURCE[0]}"
 #
 # handle auto dependency resolution
 #
-if [ ${_CORE_DEPENDENCY_AUTO} -eq 1 ]; then
-  _dependencies_resolve_paths
+if [ ${_CORE_DEPENDENCY_AUTOLOAD} -eq 1 ]; then
+  _dependencies_source
 fi

@@ -40,8 +40,8 @@ _CORE_DEPENDENCIES_RET_ER=120
 #
 # default dependency search root paths
 #
-if [ -z ${_CORE_DEPENDENCY_AUTO+x} ]; then
-  _CORE_DEPENDENCY_AUTO=1
+if [ -z ${_CORE_DEPENDENCY_AUTOLOAD+x} ]; then
+  _CORE_DEPENDENCY_AUTOLOAD=1
 fi
 
 #

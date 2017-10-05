@@ -57,6 +57,21 @@ function _dependencies_resolve_paths()
 }
 
 #
+# source dependencies
+#
+function _dependencies_source()
+{
+  if [ ${#_DEPS_RESOLVED[@]} -eq 0 ]; then
+    _dependencies_resolve_paths
+  fi
+
+  for dependencyName in ${!_DEPS_RESOLVED[@]}; do
+    _stdio_write_debug 'Sourcing the "%s" runtime dependency at "%s"' ${dependencyName} "${_DEPS_RESOLVED[$dependencyName]}"
+    source "${_DEPS_RESOLVED[$dependencyName]}"
+  done
+}
+
+#
 # write dependency loaded debug text
 #
 _core_dependency_loaded "${BASH_SOURCE[0]}"
